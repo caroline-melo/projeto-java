@@ -17,6 +17,7 @@ public class ProdutoCachorro extends Produto {
 		this.peso = peso;
 	}
 
+	@Override
 	public boolean addcart(int peso) {
 		if (this.getQuantidade() < peso ) {
 			System.out.println("\n Quantidade insuficiente no estoque!");

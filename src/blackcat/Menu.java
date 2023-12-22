@@ -5,30 +5,19 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import blackcat.model.Produto;
 import blackcat.model.ProdutoCachorro;
-
+import blackcat.controller.BlackcatController;
 
 
 public class Menu {
 
 	public static void main(String[] args) {
-		
-		// Teste da Classe Produto
-				Produto c1 = new Produto(123, 5, "Areia", 50.0f);
-				c1.visualizar();
-				c1.addcart(1);
-				c1.visualizar();
-		
-				
-		// Teste da Classe Conta Corrente
-				Produto c2 = new Produto(123, 5, "Areia", 50.0f);
-				c1.visualizar();
-				c1.addcart(3);
-				c1.visualizar();
-				
-				
+		BlackcatController produtos = new BlackcatController();				
+					
 		Scanner leia = new Scanner(System.in);
 		
-		int opcao;
+		int opcao, sku, quantidade,tipo;
+		float preco, peso;
+		String produto;
 		
 		while (true) {
 
@@ -69,6 +58,7 @@ public class Menu {
 			
 			case 1:
 				System.out.println("Ver produtos");
+				produtos.listarTodas();
 							
 				keyPress();
 				break;
@@ -91,6 +81,30 @@ public class Menu {
 			case 5:
 				System.out.println("Cadastrar novo produto");
 				
+				
+				do {
+					System.out.println("É cliente ou colaborador (1-cliente | 2-colaborador):");
+					tipo = leia.nextInt();
+				}while(tipo < 1 && tipo > 2);
+				
+				switch(tipo) {
+				case 1 -> {
+					System.out.println("Não possui acesso para esta ação.");
+				}
+				case 2 -> {
+					System.out.println("Digite o nome do produto:");
+					leia.skip("\\R?");
+					produto = leia.nextLine();
+					System.out.println("Digite o valor de venda:");
+					preco = leia.nextFloat();
+					System.out.println("Digite a quantidade:");
+					quantidade = leia.nextInt();
+					produtos.cadastrar(new ProdutoCachorro(produtos.gerarSku(), quantidade, produto, preco, 0));
+				}
+				
+				}
+				
+						
 				keyPress();
 				break;
 				

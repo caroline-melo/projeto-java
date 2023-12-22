@@ -1,6 +1,6 @@
 package blackcat.model;
 
-public class Produto {
+public abstract class Produto {
 	
 	private int sku;
 	private int quantidade;
