@@ -14,5 +14,6 @@ public interface BlackcatRepository {
 		// Ações possíveis
 		public void addcart(int quantidade, float qtdcompra);
 		public void colocarcarrinho(int numeroOrigem, int numeroDestino, float valor);
+		void maisEstoque(int sku, int quantidade);
 		
 }

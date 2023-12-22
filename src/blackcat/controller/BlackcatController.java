@@ -12,13 +12,23 @@ public class BlackcatController implements BlackcatRepository {
 
 	@Override
 	public void procurarPorNumero(int sku) {
-		// TODO Auto-generated method stub
+		var produto = buscarNaCollection(sku);
+		
+		if (produto != null)
+			produto.visualizar();
+		else
+			System.out.println("\nO produto: '"+produto+"' não foi encontrado");
 		
 	}
 
 	@Override
 	public void procurarPorNome(String produto) {
-		// TODO Auto-generated method stub
+		var sku = buscarNaCollection(produto);
+		
+		if (sku != null)
+			sku.visualizar();
+		else
+			System.out.println("\nO produto: '"+produto+"' não foi encontrado");
 		
 	}
 
@@ -39,7 +49,13 @@ public class BlackcatController implements BlackcatRepository {
 
 	@Override
 	public void deletar(int sku) {
-		// TODO Auto-generated method stub
+		var produto = buscarNaCollection(sku);
+		
+		if (produto != null) {
+			if (listaProdutos.remove(produto) == true)
+				System.out.println("\nO produto '"+produto.getProduto()+"' foi deletado com sucesso.");
+		}else
+			System.out.println("\nO produto '"+produto.getProduto()+"' não foi encontrado" );
 		
 	}
 
@@ -50,12 +66,41 @@ public class BlackcatController implements BlackcatRepository {
 	}
 
 	@Override
+	public void maisEstoque(int sku, int novaQuantidade) {
+		var produto = buscarNaCollection(sku);
+		
+		if (produto != null) {
+			produto.maisEstoque(novaQuantidade);
+			System.out.println("\nAdição de novos '"+produto.getProduto()+"' foi efetuado com sucesso.");
+		}else
+			System.out.println("\nO produto '"+produto.getProduto()+"' não foi encontrado");
+	}	
+		
+	@Override
 	public void colocarcarrinho(int numeroOrigem, int numeroDestino, float valor) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	public int gerarSku() {
 		return ++sku;
 	}
+	
+	public Produto buscarNaCollection(int sku) {
+		for (var produto : listaProdutos) {
+			if (produto.getSku() == sku) {
+				return produto;
+			}
+		}
+		return null;
+		}
+	
+	public Produto buscarNaCollection(String produto) {
+		for (var sku : listaProdutos) {
+			if (sku.getProduto() == produto) {
+				return sku;
+			}
+		}
+		return null;
+		}
 }

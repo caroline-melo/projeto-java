@@ -66,6 +66,12 @@ public abstract class Produto {
 	 return true;
 	}
 	
+	public void maisEstoque(int novaQuantidade) {
+
+		this.setQuantidade(this.getQuantidade() + novaQuantidade);
+
+	}
+	
 	public void visualizar () {
 		
 		String tipo = "";
@@ -78,5 +84,9 @@ public abstract class Produto {
 		System.out.println("Quantidade em estoque: " + this.quantidade);
 		
 	}
+
+
+
+	
 
 }

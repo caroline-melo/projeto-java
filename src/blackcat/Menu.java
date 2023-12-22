@@ -15,9 +15,20 @@ public class Menu {
 					
 		Scanner leia = new Scanner(System.in);
 		
-		int opcao, sku, quantidade,tipo;
+		int opcao, sku, quantidade,tipo, novaQuantidade;
 		float preco, peso;
 		String produto;
+		
+		System.out.println("Criar primeiros produtos:");
+		//produtos.gerarSku(), quantidade, produto, preco, peso
+		ProdutoCachorro pc1 = new ProdutoCachorro(produtos.gerarSku(), 15, "Areia", 45, 0);
+		produtos.cadastrar(pc1);
+		ProdutoCachorro pc2 = new ProdutoCachorro(produtos.gerarSku(), 10, "Catnip", 20, 0);
+		produtos.cadastrar(pc2);
+		ProdutoCachorro pc3 = new ProdutoCachorro(produtos.gerarSku(), 5, "Brinquedo", 5, 0);
+		produtos.cadastrar(pc3);
+		ProdutoCachorro pc4 = new ProdutoCachorro(produtos.gerarSku(), 2, "Caminha", 2, 0);
+		produtos.cadastrar(pc4);
 		
 		while (true) {
 
@@ -27,13 +38,16 @@ public class Menu {
 			System.out.println("                                                     ");
 			System.out.println("*****************************************************");
 			System.out.println("                                                     ");
-			System.out.println("            1 - Ver produtos                         ");
-			System.out.println("            2 - Adicionar produtos ao carrinho    	 ");
-			System.out.println("            3 - Ver carrinho						 ");
-			System.out.println("            4 - Ver estoque                          ");
-			System.out.println("            5 - Cadastrar novo produto               ");
-			System.out.println("            6 - Excluir produto                      ");
-			System.out.println("            7 - Sair                                 ");
+			System.out.println("            1 - Ver todos os produtos                ");
+			System.out.println("            2 - Procurar produtos por sku         	 ");
+			System.out.println("            3 - Procurar produtos por nome         	 ");
+			System.out.println("            4 - Adicionar produtos ao carrinho    	 ");
+			System.out.println("            5 - Ver carrinho						 ");
+			System.out.println("            6 - Ver estoque                          ");
+			System.out.println("            7 - Incluir compras no estoque           ");
+			System.out.println("            8 - Cadastrar novo produto               ");
+			System.out.println("            9 - Excluir produto                      ");
+			System.out.println("            10 - Sair                                 ");
 			System.out.println("                                                     ");
 			System.out.println("*****************************************************");
 			System.out.println("Entre com a opção desejada:                          ");
@@ -47,7 +61,7 @@ public class Menu {
 				opcao=0;
 			}
 
-			if (opcao == 7) {
+			if (opcao == 10) {
 				System.out.println("\nEsperamos que o gato preto da sorte cruze o seu caminho!");
 				sobre();
                  		leia.close();
@@ -63,22 +77,64 @@ public class Menu {
 				keyPress();
 				break;
 				
+				
 			case 2:
+				System.out.println("Procurar produto por SKU");
+				
+				System.out.println("Digite o sku do produto:");
+				sku = leia.nextInt();
+				
+				produtos.procurarPorNumero(sku);
+			
+				keyPress();				
+				break;
+				
+			case 3:
+				System.out.println("Procurar produto por nome");
+				
+				System.out.println("Digite o nome do produto:");
+				produto = leia.nextLine();
+				
+				//sku.procurarPorNome(produto);
+			
+				keyPress();				
+				break;
+				
+			case 4:
 				System.out.println("Adicionar produto ao carrinho");
 				
 			
 				keyPress();				
 				break;
-			case 3:
+				
+			case 5:
 				System.out.println("Ver carrinho");
 				keyPress();				
 				break;
-			case 4:
+				
+			case 6:
 				System.out.println("Ver estoque ");
 				
 				keyPress();				
 				break;
-			case 5:
+				
+			case 7:
+				System.out.println("Adicionar compras ao estoque ");
+				
+				System.out.println("Digite o SKU do produto:");
+				sku = leia.nextInt();
+				
+				do {
+					System.out.println("Digite a quantidade a ser adicionada ao estoque existente: ");
+					novaQuantidade = leia.nextInt();
+					
+				}while(novaQuantidade <=0);
+				produtos.maisEstoque(sku, novaQuantidade);
+				
+				keyPress();				
+				break;
+				
+			case 8:
 				System.out.println("Cadastrar novo produto");
 				
 				
@@ -108,8 +164,13 @@ public class Menu {
 				keyPress();
 				break;
 				
-			case 6:
+			case 9:
 				System.out.println("Excluir produto");
+				
+				System.out.println("\nDigite o número do produto: ");
+				sku = leia.nextInt();
+				
+				produtos.deletar(sku);
 				
 				keyPress();
 				break;
