@@ -121,6 +121,17 @@ public class Menu {
 			case 7:
 				System.out.println("Adicionar compras ao estoque ");
 				
+				do {
+					System.out.println("É cliente ou colaborador (1-cliente | 2-colaborador):");
+					tipo = leia.nextInt();
+				}while(tipo < 1 && tipo > 2);
+				
+				switch(tipo) {
+				case 1 -> {
+					System.out.println("Não possui acesso para esta ação.");
+				}
+				
+				case 2 -> {
 				System.out.println("Digite o SKU do produto:");
 				sku = leia.nextInt();
 				
@@ -130,6 +141,9 @@ public class Menu {
 					
 				}while(novaQuantidade <=0);
 				produtos.maisEstoque(sku, novaQuantidade);
+				
+				}
+				}
 				
 				keyPress();				
 				break;
